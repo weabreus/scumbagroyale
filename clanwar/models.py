@@ -42,6 +42,17 @@ class WarParticipation(models.Model):
         for war in war_dict.keys():
 
             for participant in war_dict[war]['participants']:
+                obj, created = WarParticipation.objects.get_or_create(
+                war_id = war,
+                season= war_dict[war]['season'],
+                player_tag = participant['tag'],
+                name = participant['name'],
+                cards_earned = participant['cardsEarned'],
+                battles_played = participant['battlesPlayed'],
+                wins = participant['wins']
+                )
+
+                """
                 part = WarParticipation()
                 part.war_id = war
                 part.season = war_dict[war]['season']
@@ -51,6 +62,6 @@ class WarParticipation(models.Model):
                 part.battles_played = participant['battlesPlayed']
                 part.wins = participant['wins']
                 part.save()
-
+                """
     def __str__(self):
         return self.war_id
