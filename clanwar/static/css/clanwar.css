@@ -1,0 +1,47 @@
+body {
+  padding: 15px;
+}
+
+.content {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+}
+
+.page-header {
+    background-color: #ff9400;
+    margin-top: 0;
+    padding: 20px 20px 20px 40px;
+}
+
+.page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
+    color: #ffffff;
+    font-size: 36pt;
+    text-decoration: none;
+}
+
+h1 a{
+  font-family: 'Lobster'
+}
+
+div#participations {
+  padding: 40px;
+}
+
+div#navbar {
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+.navbar-header a p  {
+  text-align: left;
+  color: #0d47a1
+  font-size: 15px;
+  font-family: 'Luckiest Guy'
+}
+
+td {
+  text-align: center;
+}
