@@ -1,6 +1,8 @@
 <html>
     <head>
-        <title>Scumbag Royale Beta</title>
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+      <title>Scumbag Royale Beta</title>
     </head>
     <body>
         <div>
@@ -8,15 +10,28 @@
         </div>
 
         <div>
-            <p>published: 14.06.2014, 12:14</p>
-            <h2><a href="">My first post</a></h2>
-            <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        </div>
-
-        <div>
-            <p>published: 14.06.2014, 12:14</p>
-            <h2><a href="">My second post</a></h2>
-            <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut f.</p>
+          <table>
+            <tr>
+              <th>war_id</th>
+              <th>season</th>
+              <th>playerTag</th>
+              <th>name</th>
+              <th>cardsEarned</th>
+              <th>battlesPlayed</th>
+              <th>win</th>
+            </tr>
+            {%for war in participation %}
+            <tr>
+              <td>{{ war.war_id }}</td>
+              <td>{{ war.season }}</td>
+              <td>{{ war.player_tag }}</td>
+              <td>{{ war.name }}</td>
+              <td>{{ war.cards_earned }}</td>
+              <td>{{ war.battles_played }}</td>
+              <td>{{ war.wins }}</td>
+            </tr>
+            {% endfor %}
+          </table>
         </div>
     </body>
 </html>
