@@ -106,7 +106,6 @@ pycurl==7.43.0
 pyflakes==1.6.0
 Pygments==2.2.0
 pylint==1.7.4
-pyodbc==4.0.17
 pyOpenSSL==17.2.0
 pyparsing==2.2.0
 PySocks==1.6.7
