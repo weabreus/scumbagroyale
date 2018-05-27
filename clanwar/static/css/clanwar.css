@@ -45,3 +45,22 @@ div#navbar {
 td {
   text-align: center;
 }
+
+.container .selection {
+  margin-right: 0;
+  margin-left: 0;
+  background-color: #fff;
+  border-color: #ddd;
+  border-width: 1px;
+  border-radius: 4px 4px 0 0
+  position: relative;
+  padding: 45px 15px 15px;
+  margin: 0 auto;
+}
+
+h3 {
+  text-align: center;
+  color: #0d47a1
+  font-size: 15px;
+  font-family: 'Luckiest Guy'
+}

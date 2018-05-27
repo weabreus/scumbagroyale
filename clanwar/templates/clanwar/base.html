@@ -1,0 +1,35 @@
+{% load staticfiles %}
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Scumbag Royale Beta</title>
+      <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
+      <link rel="stylesheet" href="{% static 'css/clanwar.css' %}">
+
+    </head>
+    <body>
+      <div>
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header row">
+              <a class="navbar-brand" href="{% url 'homepage' %}">
+                <p class='logo'><img src="../static/images/logo.png" alt="Standings" width="22" height="22" align="left middle">     ScumbagRoyale</p>
+              </a>
+            </div>
+          </div>
+        </nav>
+      </div>
+        {% block content %}
+
+        {% endblock %}
+    </body>
+</html>

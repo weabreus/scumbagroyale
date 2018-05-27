@@ -12,3 +12,6 @@ def war_participation(request):
 
     participation = WarParticipation.objects.all()
     return render(request, 'clanwar/war_participation.html', {'participation': participation})
+
+def homepage(request):
+    return render(request, 'clanwar/homepage.html')
