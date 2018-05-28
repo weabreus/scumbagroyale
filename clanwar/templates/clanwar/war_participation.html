@@ -20,8 +20,11 @@
 {% else %}
 <div id='participations'>
     {%for war_id in id %}
-    <h5><span class="label label-default">War ID:</span><strong> {{ war_id.war_id }} </strong></h5>
-    <table class=" table table-striped table-condensed text-center table-hover">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h5><span class="label label-default">War ID:</span><strong> {{ war_id.war_id }} </strong></h5>
+      </div>
+    <table class=" table table-striped table-condensed text-center table-hover border">
       <thead>
         <tr class="text-center">
           <th class="text-center">Season</th>
@@ -76,6 +79,7 @@
         {% endfor %}
       </tbody>
     </table>
+  </div>
     {% endfor%}
 </div>
   {% endif %}
