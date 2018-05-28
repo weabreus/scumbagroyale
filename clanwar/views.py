@@ -16,8 +16,14 @@ def war_paticipation_query(request):
 
 def war_participation(request):
     war = WarParticipation()
-    war.refresh(request)
+    result = war.refresh(request)
 
-    id = WarParticipation.objects.filter(war_id__contains=request.GET['clan_tag']).order_by('-season').values('war_id').distinct()
-    participation = WarParticipation.objects.filter(war_id__contains=request.GET['clan_tag']).order_by('-season')
-    return render(request, 'clanwar/war_participation.html', {'participation': participation, 'id': id})
+    if result == True:
+
+        id = WarParticipation.objects.filter(war_id__contains=request.GET['clan_tag']).order_by('-season').values('war_id').distinct()
+        participation = WarParticipation.objects.filter(war_id__contains=request.GET['clan_tag']).order_by('-season')
+        return render(request, 'clanwar/war_participation.html', {'participation': participation, 'id': id})
+
+    else:
+        participation = "Invalid Input. Please provide a valid Clan Tag."
+        return render(request, 'clanwar/war_participation.html', {'participation': participation})

@@ -1,6 +1,23 @@
 {% extends 'clanwar/base.html' %}
 
 {% block content %}
+<form method='GET' action="{% url 'war_participation' %}">
+  <div class="col-lg-6">
+    <div class="input-group">
+      <span class="input-group-btn">
+        <button type="submit" class="btn btn-default" type="button">Go!</button>
+      </span>
+      <input name='clan_tag' type="text" class="form-control" placeholder="Search for...">
+    </div>
+  </div>
+</form>
+<br/>
+<br/>
+{% if participation == 'Invalid Input. Please provide a valid Clan Tag' %}
+
+  <h5 id="warning"><span class="label label-warning">Warning</span>  {{ participation }}</h5>
+
+{% else %}
 <div id='participations'>
     {%for war_id in id %}
     <h5><span class="label label-default">War ID:</span><strong> {{ war_id.war_id }} </strong></h5>
@@ -28,4 +45,5 @@
     </table>
     {% endfor%}
 </div>
+  {% endif %}
 {% endblock %}
