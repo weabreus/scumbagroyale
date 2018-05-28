@@ -16,8 +16,8 @@ class WarParticipation(models.Model):
     class Meta:
         unique_together = (("war_id", "season", "player_tag"),)
 
-    def refresh(self):
-        url = 'http://api.royaleapi.com/clans/PPLL8/warlog'
+    def refresh(self, request):
+        url = 'http://api.royaleapi.com/clans/' + request.GET['clan_tag']    + '/warlog'
 
         headers = {
         'auth': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTE4LCJpZGVuIjoiOTcwMzE5NTA5ODM3NzgzMDQiLCJtZCI6e319.-4EA09joymVZjLrziSlx507kLtDCWQEy35lpnwmsSsA"
