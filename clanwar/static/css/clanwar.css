@@ -20,9 +20,6 @@ body {
     text-decoration: none;
 }
 
-h1 a{
-  font-family: 'Lobster'
-}
 
 div#participations {
   padding: 40px;
@@ -42,7 +39,7 @@ div#navbar {
   font-family: 'Luckiest Guy'
 }
 
-td {
+td th {
   text-align: center;
 }
 

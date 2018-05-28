@@ -18,5 +18,6 @@ def war_participation(request):
     war = WarParticipation()
     war.refresh(request)
 
-    participation = WarParticipation.objects.filter(war_id__contains=request.GET['clan_tag']).filter(battles_played=0).order_by('-season')
-    return render(request, 'clanwar/war_participation.html', {'participation': participation})
+    id = WarParticipation.objects.filter(war_id__contains=request.GET['clan_tag']).order_by('-season').values('war_id').distinct()
+    participation = WarParticipation.objects.filter(war_id__contains=request.GET['clan_tag']).order_by('-season')
+    return render(request, 'clanwar/war_participation.html', {'participation': participation, 'id': id})
