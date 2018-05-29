@@ -73,30 +73,30 @@ class Player(models.Model):
     arena_name = models.CharField(max_length=200)
     clan_name = models.CharField(max_length=200)
     clan_tag = models.CharField(max_length=200)
-    clan_img = models.URLField()
+    clan_img = models.URLField(default="https://royaleapi.com/static/img/badge/no_clan.png")
     role = models.CharField(max_length=200)
-    donations = models.IntegerField()
-    donations_delta = models.IntegerField()
-    donatios_received = models.IntegerField()
-    cards_found = models.IntegerField()
-    challenge_cards = models.IntegerField()
-    challenge_max_wins = models.IntegerField()
-    clan_cards_collected = models.IntegerField()
-    level = models.IntegerField()
-    max_trophies = models.IntegerField()
+    donations = models.IntegerField(default=0)
+    donations_delta = models.IntegerField(default=0)
+    donatios_received = models.IntegerField(default=0)
+    cards_found = models.IntegerField(default=0)
+    challenge_cards = models.IntegerField(default=0)
+    challenge_max_wins = models.IntegerField(default=0)
+    clan_cards_collected = models.IntegerField(default=0)
+    level = models.IntegerField(default=0)
+    max_trophies = models.IntegerField(default=0)
     current_best_trophies = models.IntegerField(default=0)
     best_season_trophies = models.IntegerField(default=0)
     previous_season_trophies = models.IntegerField(default=0)
-    three_crown_wins = models.IntegerField()
-    total_donations = models.IntegerField()
-    draws = models.IntegerField()
-    draws_percent = models.FloatField()
-    losses = models.IntegerField()
-    losses_percent = models.FloatField()
-    total_games = models.IntegerField()
-    war_day_wins = models.IntegerField()
-    wins = models.IntegerField()
-    wins_percent = models.FloatField()
+    three_crown_wins = models.IntegerField(default=0)
+    total_donations = models.IntegerField(default=0)
+    draws = models.IntegerField(default=0)
+    draws_percent = models.FloatField(default=0)
+    losses = models.IntegerField(default=0)
+    losses_percent = models.FloatField(default=0)
+    total_games = models.IntegerField(default=0)
+    war_day_wins = models.IntegerField(default=0)
+    wins = models.IntegerField(default=0)
+    wins_percent = models.FloatField(default=0)
 
     class Meta:
         unique_together = (("player_tag"),)
@@ -111,7 +111,61 @@ class Player(models.Model):
         response = requests.request("GET", url, headers=headers)
         data = response.json()
 
-        if "leagueStatistics" in data.keys():
+        if type(data['clan']) == type(None) and "leagueStatistics" in data.keys():
+            obj, created = Player.objects.update_or_create(
+            player_tag = data['tag'],
+            defaults={
+            "name": data['name'],
+            "trophies": data['trophies'],
+            "arena_number": data['arena']['arena'],
+            "arena_name": data['arena']['name'],
+            "clan_img": "https://royaleapi.com/static/img/badge/no_clan.png",
+            "cards_found": data['stats']['cardsFound'],
+            "challenge_cards": data['stats']['challengeCardsWon'],
+            "challenge_max_wins": data['stats']['challengeMaxWins'],
+            "level": data['stats']['level'],
+            "max_trophies": data['stats']['maxTrophies'],
+            "current_best_trophies": data['leagueStatistics']['currentSeason']['bestTrophies'],
+            "best_season_trophies": data['leagueStatistics']['bestSeason']['trophies'],
+            "previous_season_trophies": data['leagueStatistics']['previousSeason']['trophies'],
+            "three_crown_wins": data['stats']['threeCrownWins'],
+            "draws": data['games']['draws'],
+            "draws_percent": data['games']['drawsPercent'],
+            "losses": data['games']['losses'],
+            "losses_percent": data['games']['lossesPercent'],
+            "total_games": data['games']['total'],
+            "wins": data['games']['wins'],
+            "wins_percent": data['games']['winsPercent']
+            }
+            )
+
+        elif type(data['clan']) == type(None) and "leagueStatistics" not in data.keys():
+            obj, created = Player.objects.update_or_create(
+            player_tag = data['tag'],
+            defaults={
+            "name": data['name'],
+            "trophies": data['trophies'],
+            "arena_number": data['arena']['arena'],
+            "arena_name": data['arena']['name'],
+            "clan_img": "https://royaleapi.com/static/img/badge/no_clan.png",
+            "cards_found": data['stats']['cardsFound'],
+            "challenge_cards": data['stats']['challengeCardsWon'],
+            "challenge_max_wins": data['stats']['challengeMaxWins'],
+            "level": data['stats']['level'],
+            "max_trophies": data['stats']['maxTrophies'],
+            "three_crown_wins": data['stats']['threeCrownWins'],
+            "draws": data['games']['draws'],
+            "draws_percent": data['games']['drawsPercent'],
+            "losses": data['games']['losses'],
+            "losses_percent": data['games']['lossesPercent'],
+            "total_games": data['games']['total'],
+            "wins": data['games']['wins'],
+            "wins_percent": data['games']['winsPercent']
+            }
+            )
+
+
+        elif "leagueStatistics" in data.keys():
             obj, created = Player.objects.update_or_create(
                 player_tag = data['tag'],
                 defaults={
