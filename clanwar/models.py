@@ -86,7 +86,7 @@ class Player(models.Model):
     max_trophies = models.IntegerField()
     current_best_trophies = models.IntegerField(default=0)
     best_season_trophies = models.IntegerField(default=0)
-    previous_season_trophies = models.IntegerField()
+    previous_season_trophies = models.IntegerField(default=0)
     three_crown_wins = models.IntegerField()
     total_donations = models.IntegerField()
     draws = models.IntegerField()
