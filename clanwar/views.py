@@ -3,7 +3,7 @@ from django.shortcuts import redirect
 from django.utils import timezone
 import requests
 import json
-from .models import WarParticipation
+from .models import WarParticipation, Player
 
 
 # Create your views here.
@@ -27,3 +27,11 @@ def war_participation(request):
     else:
         participation = "Invalid Input. Please provide a valid Clan Tag."
         return render(request, 'clanwar/war_participation.html', {'participation': participation})
+
+def player_participation(request):
+    play = Player()
+    result = play.update(request)
+
+    participation = WarParticipation.objects.filter(player_tag=request.GET['player_tag']).order_by('-season')
+    player_info = Player.objects.filter(player_tag=request.GET['player_tag'])
+    return render(request, 'clanwar/player_participation.html', {'participation': participation, 'player_info': player_info})
