@@ -32,6 +32,17 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #555;
         }
+        .participation table{
+          width: 50%;
+          counter-reset: row-num;
+        }
+        .participation tbody tr {
+          counter-increment: row-num;
+        }
+        .participation tbody tr td:first-child::after {
+            content: counter(row-num) ". ";
+            font-weight: bold;
+        }
       </style>
       <title>Scumbag Royale Beta</title>
       <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
