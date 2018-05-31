@@ -1,11 +1,15 @@
 from django.db import models
 import requests
 import json
+from datetime import datetime
+from time import strftime
 
 # Create your models here.
 
+
 class WarParticipation(models.Model):
     war_id = models.CharField(max_length=200)
+    time_id = models.DateTimeField(default=datetime.now)
     season = models.CharField(max_length=200)
     player_tag = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
@@ -44,14 +48,15 @@ class WarParticipation(models.Model):
                 war_id.sort()
                 war_id = "".join(war_id)
 
-                war_dict[war_id] = {"participants": war['participants'], "season": war['seasonNumber']}
+                war_dict[war_id] = {"date": war['createdDate'], "participants": war['participants'], "season": war['seasonNumber']}
 
             for war in war_dict.keys():
 
                 for participant in war_dict[war]['participants']:
                     obj, created = WarParticipation.objects.get_or_create(
                     war_id = war,
-                    season= war_dict[war]['season'],
+                    time_id = datetime.fromtimestamp(war_dict [war]['date']),
+                    season = war_dict[war]['season'],
                     player_tag = participant['tag'],
                     name = participant['name'],
                     cards_earned = participant['cardsEarned'],
