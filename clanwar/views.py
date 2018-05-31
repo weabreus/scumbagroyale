@@ -19,9 +19,8 @@ def war_participation(request):
     result = war.refresh(request)
 
     if result == True:
-
-        id = WarParticipation.objects.filter(war_id__contains=request.GET['clan_tag'].upper()).order_by('-time_id').values('war_id', 'time_id').distinct()
-        participation = WarParticipation.objects.filter(war_id__contains=request.GET['clan_tag'].upper()).order_by('war_id')
+        id = WarParticipation.objects.filter(war_id__contains=request.GET['clan_tag'].upper()).order_by('-time_id').values('war_id', 'time_id', "season").distinct()
+        participation = WarParticipation.objects.filter(war_id__contains=request.GET['clan_tag'].upper()).filter(clan_tag=request.GET['clan_tag']).order_by('war_id')
         return render(request, 'clanwar/war_participation.html', {'participation': participation, 'id': id})
 
     else:

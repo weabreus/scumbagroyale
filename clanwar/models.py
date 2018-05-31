@@ -3,9 +3,25 @@ import requests
 import json
 from datetime import datetime
 from time import strftime
+import pytz
 
 # Create your models here.
 
+class ClanStandings(models.Model):
+    clan_img = models.URLField(default="https://royaleapi.com/static/img/badge/no_clan.png")
+    battles_played =  models.IntegerField()
+    crowns = models.IntegerField()
+    name = models.CharField(max_length=100)
+    participants = models.IntegerField()
+    clan_tag = models.CharField(max_length=100)
+    war_trophies = models.IntegerField()
+    war_trophies_change = models.IntegerField()
+    war_trophies_start = models.IntegerField()
+    wins = models.IntegerField()
+    war_id = models.CharField(max_length=100)
+
+    class Meta:
+        unique_together = (('war_id', 'clan_tag'),)
 
 class WarParticipation(models.Model):
     war_id = models.CharField(max_length=200)
@@ -16,9 +32,10 @@ class WarParticipation(models.Model):
     cards_earned = models.CharField(max_length=200)
     battles_played = models.CharField(max_length=200)
     wins = models.CharField(max_length=200)
+    clan_tag = models.CharField(max_length=200)
 
     class Meta:
-        unique_together = (("war_id", "season", "player_tag"),)
+        unique_together = (("war_id", "player_tag"),)
 
     def refresh(self, request):
         url = 'http://api.royaleapi.com/clans/' + request.GET['clan_tag'].upper()    + '/warlog'
@@ -37,6 +54,8 @@ class WarParticipation(models.Model):
 
         except:
 
+
+
             war_dict = dict()
 
             for war in data:
@@ -48,21 +67,39 @@ class WarParticipation(models.Model):
                 war_id.sort()
                 war_id = "".join(war_id)
 
-                war_dict[war_id] = {"date": war['createdDate'], "participants": war['participants'], "season": war['seasonNumber']}
+                war_dict[war_id] = {"date": war['createdDate'], "participants": war['participants'], "season": war['seasonNumber'], "standings": war['standings']}
 
             for war in war_dict.keys():
+
+                for clan in war_dict[war]['standings']:
+                    obj, created = ClanStandings.objects.get_or_create(
+                    war_id = war,
+                    clan_img = clan['badge']['image'],
+                    battles_played = clan['battlesPlayed'],
+                    crowns = clan['crowns'],
+                    name = clan['name'],
+                    participants = clan['participants'],
+                    clan_tag = clan ['tag'],
+                    war_trophies = clan['warTrophies'],
+                    war_trophies_change = clan['warTrophiesChange'],
+                    war_trophies_start = clan['warTrophies'] - clan['warTrophiesChange'],
+                    wins = clan['wins']
+                    )
 
                 for participant in war_dict[war]['participants']:
                     obj, created = WarParticipation.objects.get_or_create(
                     war_id = war,
-                    time_id = datetime.fromtimestamp(war_dict [war]['date']),
+                    time_id = datetime.utcfromtimestamp(war_dict [war]['date']).replace(tzinfo=pytz.utc),
                     season = war_dict[war]['season'],
                     player_tag = participant['tag'],
                     name = participant['name'],
                     cards_earned = participant['cardsEarned'],
                     battles_played = participant['battlesPlayed'],
-                    wins = participant['wins']
+                    wins = participant['wins'],
+                    clan_tag = request.GET['clan_tag']
                     )
+
+
 
             return True
 
@@ -115,6 +152,15 @@ class Player(models.Model):
 
         response = requests.request("GET", url, headers=headers)
         data = response.json()
+
+        class returnFalse(dict):
+            def __missing__(self, key):
+                return {}
+        class returnZero(dict):
+            def __missing__(self, key):
+                return 0
+
+
 
         if type(data['clan']) == type(None) and "leagueStatistics" in data.keys():
             obj, created = Player.objects.update_or_create(
@@ -191,9 +237,9 @@ class Player(models.Model):
                 "clan_cards_collected": data['stats']['clanCardsCollected'],
                 "level": data['stats']['level'],
                 "max_trophies": data['stats']['maxTrophies'],
-                "current_best_trophies": data['leagueStatistics']['currentSeason']['bestTrophies'],
-                "best_season_trophies": data['leagueStatistics']['bestSeason']['trophies'],
-                "previous_season_trophies": data['leagueStatistics']['previousSeason']['trophies'],
+                "current_best_trophies": returnZero(data['leagueStatistics']['currentSeason'])['bestTrophies'],
+                "best_season_trophies": returnZero(returnFalse(data['leagueStatistics'])['bestSeason'])['trophies'],
+                "previous_season_trophies": returnZero(returnFalse(data['leagueStatistics'])['previousSeason'])['trophies'],
                 "three_crown_wins": data['stats']['threeCrownWins'],
                 "total_donations": data['stats']['totalDonations'],
                 "draws": data['games']['draws'],
@@ -206,7 +252,7 @@ class Player(models.Model):
                 "wins_percent": data['games']['winsPercent']
                 }
                 )
-        else:
+        if "leagueStatistics" not in data.keys():
             obj, created = Player.objects.update_or_create(
                 player_tag = data['tag'],
                 defaults={
