@@ -43,6 +43,35 @@
             content: counter(row-num) ". ";
             font-weight: bold;
         }
+
+        @media screen and (min-width: 993px) {
+          .participations {
+            width: 961px;
+            margin-left: auto;
+            margin-right: auto;
+          }
+          .war-season {
+            height: 130px;
+            text-align: right;
+            border-top: 0px;
+            border-left: 1px solid lightgrey;
+          }
+        }
+
+        @media screen and (max-width: 992px) {
+          .participations {
+            width: 527px;
+            margin-left: auto;
+            margin-right: auto;
+          }
+          .war-season {
+            height: 50px;
+            text-align: center;
+            border-top: 1px solid lightgrey;
+            border-left: 0px;
+            margin-bottom: 10px;
+          }
+        }
       </style>
       <title>Scumbag Royale Beta</title>
       <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">

@@ -19,7 +19,7 @@
   <h5 id="warning"><span class="label label-warning">Warning</span>  {{ participation }}</h5>
 
 {% else %}
-<div id='participations'>
+<div class="participations" id='participations'>
     {%for war_id in id %}
     <div class="panel panel-default">
       <div class="row">
@@ -28,52 +28,52 @@
             {% for clan in clan_std %}
               {% if clan.war_id == war_id.war_id %}
               <div class="row">
-                <div class="col-sm-6 ">
-                  <h4  style="margin: 5"><img src={{ clan.clan_img}} height="20" width="17"> <strong>{{ clan.name }}</strong></h4>
+                <div class="col-md-8 ">
+                  <h4  style="float: left; clear: left; margin-top: 5px;"><img src={{ clan.clan_img}} height="20" width="17"> <strong>{{ clan.name }}</strong></h4>
                 </div>
-                <div class="col-sm-6">
-                  <h5 style="margin: 5; text-align: right"><strong>{{ clan.war_trophies}}</strong> <img src="../static/images/cw-trophy.png" height="20" width="17"></h5>
+                <div class="col-md-4" style="text-align: right">
+                  <h4 style="margin-top: 5px;"><strong>{{ clan.war_trophies}}</strong> <img src="../static/images/cw-trophy.png" height="20" width="17"></h4>
                 </div>
               </div>
               <table class="table table-condensed" style="width: 100%; padding: 0; margin: 0;">
                 <tr>
                   <td style="font-size: 10px;">War trophies change</td>
-                  <td style="text-align: right; font-size: 10px">{{ clan.war_trophies_change }} <img src="../static/images/cw-trophy.png" height="13" width="12.05"></td>
+                  <td style="text-align: right; font-size: 11px">{{ clan.war_trophies_change }} <img src="../static/images/cw-trophy.png" height="13" width="12.05"></td>
                 </tr>
                 <tr>
                   <td style="font-size: 10px;">Paticipants</td>
-                  <td style="text-align: right; font-size: 10px">{{ clan.participants }} <img src="../static/images/people.png" height="13" width="12.67"></td>
+                  <td style="text-align: right; font-size: 11px">{{ clan.participants }} <img src="../static/images/people.png" height="13" width="12.67"></td>
                 <tr>
                 <tr>
                   <td style="font-size: 10px;">Crowns</td>
-                  <td style="text-align: right; font-size: 10px">{{ clan.crowns }} <img src="../static/images/crown-blue.png" height="10.35" width="12.67"></td>
+                  <td style="text-align: right; font-size: 11px">{{ clan.crowns }} <img src="../static/images/crown-blue.png" height="10.35" width="12.67"></td>
                 <tr>
                   <tr>
-                    <td style="font-size: 10px;">Wins</td>
-                    <td style="text-align: right; font-size: 10px">{{ clan.wins }} <img src="../static/images/cw-war-win.png" height="13" width="8.77"></td>
+                    <td style="font-size: 11px;">Wins</td>
+                    <td style="text-align: right; font-size: 11px">{{ clan.wins }} <img src="../static/images/cw-war-win.png" height="13" width="8.77"></td>
                   <tr>
               </table>
           </div>
-          <div class="col-md-4 player-separator">
-            <h5 style="margin-top: 5px;"><strong>Oponents</strong></h5>
+          <div class="col-md-5 player-separator">
+            <h4 style="margin-top: 5px;"><strong>Oponents</strong></h4>
             <table class="table table-condensed" style="width: 100%; padding: 0; margin: 0;">
               {% for oponent in oponent_std %}
                 {% if oponent.war_id == war_id.war_id %}
               <tr>
-                <td style="font-size: 10px;"><img src={{ oponent.clan_img}} height="10" width="9"> {{ oponent.name }}</td>
-                <td style="text-align: right; font-size: 10px">{{ oponent.war_trophies }} <img src="../static/images/cw-trophy.png" height="13" width="12.05"></td>
-                <td style="text-align: right; font-size: 10px">{{ oponent.war_trophies_change }} <img src="../static/images/cw-trophy.png" height="13" width="12.05"></td>
-                <td style="text-align: right; font-size: 10px">{{ oponent.participants }} <img src="../static/images/people.png" height="13" width="12.67"></td>
-                <td style="text-align: right; font-size: 10px">{{ oponent.crowns }} <img src="../static/images/crown-blue.png" height="10.35" width="12.67"></td>
-                <td style="text-align: right; font-size: 10px">{{ oponent.wins }} <img src="../static/images/cw-war-win.png" height="13" width="8.77"></td>
+                <td style="font-size: 11px;"><img src={{ oponent.clan_img}} height="10" width="9"> {{ oponent.name }}</td>
+                <td style="text-align: right; font-size: 11px">{{ oponent.war_trophies }} <img src="../static/images/cw-trophy.png" height="13" width="12.05"></td>
+                <td style="text-align: right; font-size: 11px">{{ oponent.war_trophies_change }} <img src="../static/images/cw-trophy.png" height="13" width="12.05"></td>
+                <td style="text-align: right; font-size: 11px">{{ oponent.participants }} <img src="../static/images/people.png" height="13" width="12.67"></td>
+                <td style="text-align: right; font-size: 11px">{{ oponent.crowns }} <img src="../static/images/crown-blue.png" height="10.35" width="12.67"></td>
+                <td style="text-align: right; font-size: 11px">{{ oponent.wins }} <img src="../static/images/cw-war-win.png" height="13" width="8.77"></td>
               </tr>
                 {% endif %}
               {% endfor %}
             </table>
           </div>
-          <div class="col-md-4  player-separator" style="height: 130px; text-align: right;">
-            <h4>Season {{ war_id.season }} </h4>
-            <h5><span class="label label-default">Time:</span><strong> {{ war_id.time_id }} </strong></h5>
+          <div class="war-season col-md-3  player-separator">
+            <h4><strong>Season {{ war_id.season }}</strong></h4>
+            <h6><span class="label label-default">Time:</span><strong> {{ war_id.time_id }} </strong></h6>
           </div>
           {% endif %}
         {% endfor %}
