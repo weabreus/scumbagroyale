@@ -22,30 +22,81 @@
 <div id='participations'>
     {%for war_id in id %}
     <div class="panel panel-default">
-      <div class="panel-body">
-        <h4>Season {{ war_id.season }} </h4>
-        <h5><span class="label label-default">Time:</span><strong> {{ war_id.time_id }} </strong></h5>
+      <div class="row">
+      <div class="container panel-body" style="width: 100%; padding: 5px 15px 5px 15px;">
+          <div class="col-md-4">
+            {% for clan in clan_std %}
+              {% if clan.war_id == war_id.war_id %}
+              <div class="row">
+                <div class="col-sm-6 ">
+                  <h4  style="margin: 5"><img src={{ clan.clan_img}} height="20" width="17"> <strong>{{ clan.name }}</strong></h4>
+                </div>
+                <div class="col-sm-6">
+                  <h5 style="margin: 5; text-align: right"><strong>{{ clan.war_trophies}}</strong> <img src="../static/images/cw-trophy.png" height="20" width="17"></h5>
+                </div>
+              </div>
+              <table class="table table-condensed" style="width: 100%; padding: 0; margin: 0;">
+                <tr>
+                  <td style="font-size: 10px;">War trophies change</td>
+                  <td style="text-align: right; font-size: 10px">{{ clan.war_trophies_change }} <img src="../static/images/cw-trophy.png" height="13" width="12.05"></td>
+                </tr>
+                <tr>
+                  <td style="font-size: 10px;">Paticipants</td>
+                  <td style="text-align: right; font-size: 10px">{{ clan.participants }} <img src="../static/images/people.png" height="13" width="12.67"></td>
+                <tr>
+                <tr>
+                  <td style="font-size: 10px;">Crowns</td>
+                  <td style="text-align: right; font-size: 10px">{{ clan.crowns }} <img src="../static/images/crown-blue.png" height="10.35" width="12.67"></td>
+                <tr>
+                  <tr>
+                    <td style="font-size: 10px;">Wins</td>
+                    <td style="text-align: right; font-size: 10px">{{ clan.wins }} <img src="../static/images/cw-war-win.png" height="13" width="8.77"></td>
+                  <tr>
+              </table>
+          </div>
+          <div class="col-md-4 player-separator">
+            <h5 style="margin-top: 5px;"><strong>Oponents</strong></h5>
+            <table class="table table-condensed" style="width: 100%; padding: 0; margin: 0;">
+              {% for oponent in oponent_std %}
+                {% if oponent.war_id == war_id.war_id %}
+              <tr>
+                <td style="font-size: 10px;"><img src={{ oponent.clan_img}} height="10" width="9"> {{ oponent.name }}</td>
+                <td style="text-align: right; font-size: 10px">{{ oponent.war_trophies }} <img src="../static/images/cw-trophy.png" height="13" width="12.05"></td>
+                <td style="text-align: right; font-size: 10px">{{ oponent.war_trophies_change }} <img src="../static/images/cw-trophy.png" height="13" width="12.05"></td>
+                <td style="text-align: right; font-size: 10px">{{ oponent.participants }} <img src="../static/images/people.png" height="13" width="12.67"></td>
+                <td style="text-align: right; font-size: 10px">{{ oponent.crowns }} <img src="../static/images/crown-blue.png" height="10.35" width="12.67"></td>
+                <td style="text-align: right; font-size: 10px">{{ oponent.wins }} <img src="../static/images/cw-war-win.png" height="13" width="8.77"></td>
+              </tr>
+                {% endif %}
+              {% endfor %}
+            </table>
+          </div>
+          <div class="col-md-4  player-separator" style="height: 130px; text-align: right;">
+            <h4>Season {{ war_id.season }} </h4>
+            <h5><span class="label label-default">Time:</span><strong> {{ war_id.time_id }} </strong></h5>
+          </div>
+          {% endif %}
+        {% endfor %}
+        </div>
       </div>
-    <div class="pre-scrollable">
-    <table class="participation table table-striped table-condensed text-center table-hover border pre-scrollable">
+    <div class="pre-scrollable" style="border-top: 1px solid lightgrey;">
+    <table class="participation table table-striped table-condensed text-center table-hover border ">
       <thead>
         <tr class="text-center">
           <th></th>
-          <th class="text-center">Season</th>
-          <th class="text-center">Player Tag</th>
-          <th class="text-center">Name <img src="../static/images/player_icon.png" height="20" width="20"></th>
-          <th class="text-center">Cards Earned  <img src="../static/images/cw-cards.png" height="20" width="18.1081081"></th>
-          <th class="text-center">Battles Played <img src="../static/images/cw-battle.png" height="20" width="18.782609"></th>
-          <th class="text-center">Wins <img src="../static/images/cw-war-win.png" height="20" width="13.939759"></th>
+          <th class="text-center" style="font-size: 12px">Player Tag</th>
+          <th class="text-center" style="font-size: 12px">Name <img src="../static/images/people.png" height="20" width="20"></th>
+          <th class="text-center" style="font-size: 12px">Cards Earned  <img src="../static/images/cw-cards.png" height="20" width="18.1081081"></th>
+          <th class="text-center" style="font-size: 12px">Battles Played <img src="../static/images/cw-battle.png" height="20" width="18.782609"></th>
+          <th class="text-center" style="font-size: 12px">Wins <img src="../static/images/cw-war-win.png" height="20" width="13.939759"></th>
         </tr>
       </thead>
-      <tbody class="participation">
+      <tbody class="participation pre-scrollable">
         {%for war in participation %}
           {% if war.war_id == war_id.war_id %}
             {% if war.battles_played == "0" %}
               <tr class="participation text-center small danger">
                 <td></td>
-                <td><strong>{{ war.season }}</strong></td>
                 <td>
                   <form method='GET' action="{% url 'player_participation' %}">
                     <button type="submit" class="table-btn" type="button"><strong>{{ war.player_tag }}</strong></button>
@@ -60,7 +111,6 @@
             {% else %}
               <tr class="participations text-center small">
                 <td></td>
-                <td>{{ war.season }}</td>
                 <td>
                   <form method='GET' action="{% url 'player_participation' %}">
                     <button type="submit" class="table-btn" type="button">{{ war.player_tag }}</button>

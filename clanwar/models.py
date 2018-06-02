@@ -96,7 +96,7 @@ class WarParticipation(models.Model):
                     cards_earned = participant['cardsEarned'],
                     battles_played = participant['battlesPlayed'],
                     wins = participant['wins'],
-                    clan_tag = request.GET['clan_tag']
+                    clan_tag = request.GET['clan_tag'].upper()
                     )
 
 
@@ -144,7 +144,7 @@ class Player(models.Model):
         unique_together = (("player_tag"),)
 
     def update(self, request):
-        url = 'http://api.royaleapi.com/player/' + str(request.GET['player_tag'])
+        url = 'http://api.royaleapi.com/player/' + str(request.GET['player_tag']).upper()
 
         headers = {
         'auth': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTE4LCJpZGVuIjoiOTcwMzE5NTA5ODM3NzgzMDQiLCJtZCI6e319.-4EA09joymVZjLrziSlx507kLtDCWQEy35lpnwmsSsA"
