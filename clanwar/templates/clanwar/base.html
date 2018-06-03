@@ -15,7 +15,7 @@
       <style>
         /* width */
         ::-webkit-scrollbar {
-            width: 2px;
+            width: 0.5em;
         }
 
         /* Track */
@@ -56,9 +56,12 @@
             border-top: 0px;
             border-left: 1px solid lightgrey;
           }
+          .player-separator {
+            border-left: 1px solid lightgrey;
+          }
         }
 
-        @media screen and (max-width: 992px) {
+        @media screen and (min-width: 536px) and (max-width: 992px) {
           .participations {
             width: 527px;
             margin-left: auto;
@@ -68,8 +71,30 @@
             height: 50px;
             text-align: center;
             border-top: 1px solid lightgrey;
-            border-left: 0px;
             margin-bottom: 10px;
+          }
+          .player-separator {
+            border-left: 0px;
+          }
+        }
+
+        @media screen and (max-width: 535px) {
+          .table-img {
+            visibility: hidden;
+            height: 0;
+            width: 0;
+            margin: 0;
+            padding: 0;
+
+          }
+          .war-season {
+            height: 50px;
+            text-align: center;
+            border-top: 1px solid lightgrey;
+            margin-bottom: 10px;
+          }
+          .player-separator {
+            border-left: 0px;
           }
         }
       </style>
