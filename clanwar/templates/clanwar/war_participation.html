@@ -1,6 +1,7 @@
 {% extends 'clanwar/base.html' %}
 
 {% block content %}
+
 <div class="participations">
   <form method='GET' action="{% url 'war_participation' %}">
     <div>
@@ -20,6 +21,100 @@
   <h5 id="warning"><span class="label label-warning">Warning</span>  {{ participation }}</h5>
 
 {% else %}
+<div class="participations">
+  <div class="panel panel-default">
+    <div style="border-bottom: 1px solid lightgrey;">
+    <h4 style="margin: 5px 5px 5px 15px;"><strong>Current War - {{ cw|lookup:'state'}}</strong> <img src="../static/images/battle.png" height="20" width="22.17"></h4>
+    </div>
+    {% if cw|lookup:'state' != 'notInWar' %}
+      {% if cw|lookup:'state' == 'collectionDay' %}
+        <div class="row">
+          <div class="container panel-body" style="width: 100%; padding: 5px 15px 5px 15px;">
+            <div class="col-md-4">
+              <table class="table-condensed" style="width: 100%; padding: 0; margin: 0; border-top: 0px;">
+                <tbody>
+                  <tr style="border-bottom: 1px solid lightgrey;">
+                    <td><h4  style="float: left; clear: left; margin-top: 5px; margin-bottom: 5px;"><strong>{{ cw|lookup:'clan'|lookup:'name'}}</strong></h4></td>
+                    <td style="text-align: right;"><h4 style="margin-top: 5px; margin-bottom: 5px;"><strong>{{ cw|lookup:'clan'|lookup:'warTrophies'}}</strong> <img src="../static/images/cw-trophy.png" height="20" width="17"></h4></td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid lightgrey;">
+                    <td style="font-size: 12px;">Participants</td>
+                    <td style="text-align: right; font-size: 12px">{{ cw|lookup:'clan'|lookup:'participants' }} <img src="../static/images/people.png" height="13" width="12.67"></td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid lightgrey;">
+                    <td style="font-size: 12px;">Battles Played</td>
+                    <td style="text-align: right; font-size: 12px">{{ cw|lookup:'clan'|lookup:'battlesPlayed' }} <img src="../static/images/cw-battle.png" height="13" width="12.01"></td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid lightgrey;">
+                    <td style="font-size: 12px;">Battles Won</td>
+                    <td style="text-align: right; font-size: 12px">{{ cw|lookup:'clan'|lookup:'wins' }} <img src="../static/images/cw-war-win.png" height="17.79" width="12.01"></td>
+                  </tr>
+                  <tr>
+                    <td style="font-size: 12px;">Crowns</td>
+                    <td style="text-align: right; font-size: 12px">{{ cw|lookup:'clan'|lookup:'crowns' }} <img src="../static/images/crown-blue.png" height="10.35" width="12.67"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-md-5 player-separator" style="height: 130px;">
+              <table style="width: 100%;">
+                <tbody>
+                  <tr>
+                    <td><h4><strong>Oponents</strong></h4></td>
+                  <tr>
+                  <tr>
+                    <td style="text-align: center"><h5>Oponents will be availabe in War Day.</br><span class="label label-default">Collection ends at:</span> {{ cw|to_datetime:'collectionEndTime'}}</h5></td>
+                  <tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="war-season col-md-3  player-separator" style="text-align: center;">
+              <img style="margin-top: 5px;" class="current-logo" style="text-align: center;" src={{ cw|lookup:'clan'|lookup:'badge'|lookup:'image'}} height="130" width="109.34">
+            </div>
+          </div>
+        </div>
+        <div class="pre-scrollable" style="border-top: 1px solid lightgrey;">
+          <table class="participation table table-striped table-condensed text-center table-hover border ">
+            <thead>
+              <tr class="text-center small">
+                <th></th>
+                <th class="text-center" style="font-size: 12px">Tag</th>
+                <th class="text-center" style="font-size: 12px">Name <img class="table-img" src="../static/images/people.png" height="20" width="20"></th>
+                <th class="text-center" style="font-size: 12px">Cards  <img class="table-img" src="../static/images/cw-cards.png" height="20" width="18.1081081"></th>
+                <th class="text-center" style="font-size: 12px">Battles <img class="table-img" src="../static/images/cw-battle.png" height="20" width="18.782609"></th>
+                <th class="text-center" style="font-size: 12px">Wins <img class="table-img" src="../static/images/cw-war-win.png" height="20" width="13.939759"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for participant in cw|lookup:'participants' %}
+                <tr class="small">
+                  <td></td>
+                  <td>
+                    <form method='GET' action="{% url 'player_participation' %}">
+                      <button type="submit" class="table-btn" type="button">{{ participant|lookup:'tag' }}</button>
+                      <input name='player_tag' type="hidden" class="form-control" value={{ participant|lookup:'tag' }}>
+                    </form>
+                  </td>
+                  <td>{{ participant|lookup:'name'}}</td>
+                  <td>{{ participant|lookup:'cardsEarned'}}</td>
+                  <td>{{ participant|lookup:'battlesPlayed'}}</td>
+                  <td>
+                    {% for i in participant|to_range:'wins' %}
+                      <img src="../static/images/cw-war-win.png" height="20" width="13.939759">
+                    {% endfor %}
+                    {% for l in participant|to_range_loss:'wins' %}
+                      <img src="../static/images/cw-war-loss.png" height="20" width="13.939759">
+                    {% endfor %}
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% endif %}
+    {% endif %}
+  </div>
+</div>
 <div class="participations" id='participations'>
     {%for war_id in id %}
     <div class="panel panel-default">

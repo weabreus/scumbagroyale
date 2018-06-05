@@ -1,6 +1,10 @@
 {% load staticfiles %}
 {# Load the tag library #}
 {% load bootstrap3 %}
+{% load my_filters %}
+{% load to_datetime %}
+{% load to_range %}
+{% load to_range_loss %}
 
 {# Load CSS and JavaScript #}
 {% bootstrap_css %}
@@ -59,6 +63,10 @@
           .player-separator {
             border-left: 1px solid lightgrey;
           }
+          .current-logo {
+            height: 130px;
+            width: 109.34px;
+          }
         }
 
         @media screen and (min-width: 536px) and (max-width: 992px) {
@@ -75,6 +83,10 @@
           }
           .player-separator {
             border-left: 0px;
+          }
+          .current-logo {
+            height: 50px;
+            width: 42.05px;
           }
         }
 
@@ -95,6 +107,10 @@
           }
           .player-separator {
             border-left: 0px;
+          }
+          .current-logo {
+            height: 50px;
+            width: 42.05px;
           }
         }
       </style>

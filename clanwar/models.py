@@ -156,10 +156,14 @@ class Player(models.Model):
         class returnFalse(dict):
             def __missing__(self, key):
                 return {}
+
         class returnZero(dict):
             def __missing__(self, key):
                 return 0
 
+        class returnNone(dict):
+            def __missing__(self, key):
+                return None
 
 
         if type(data['clan']) == type(None) and "leagueStatistics" in data.keys():
@@ -252,7 +256,7 @@ class Player(models.Model):
                 "wins_percent": data['games']['winsPercent']
                 }
                 )
-        if "leagueStatistics" not in data.keys():
+        elif "leagueStatistics" not in data.keys():
             obj, created = Player.objects.update_or_create(
                 player_tag = data['tag'],
                 defaults={
