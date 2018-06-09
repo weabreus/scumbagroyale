@@ -1,5 +1,15 @@
+@font-face {
+   font-family: ClashFont;
+   src: url(../fonts/Clash-Regular.otf);
+}
+
+@font-face {
+   font-family: ClashFont;
+   src: url(../fonts/Clash-Bold.otf);
+   font-weight: bold;
+}
+
 body {
-  padding: 15px;
 }
 
 .content {
@@ -68,4 +78,137 @@ form {
   padding: 0;
   margin: 0;
 
+}
+
+.container-homepage {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-bottom: 140px;
+}
+
+.box {
+  text-align: center;
+}
+
+.clan-wars {
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(../images/clanwar.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-blend-mode: darken;
+  color: #FFFFFF;
+}
+
+.clan-wars-query {
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(../images/participation-query.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-blend-mode: darken;
+  color: #FFFFFF;
+  margin-top: 30px;
+}
+
+.top-clans {
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(../images/topclans.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-blend-mode: darken;
+  color: #FFFFFF;
+}
+
+.top-players {
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(../images/topplayers.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-blend-mode: darken;
+  color: #FFFFFF;
+}
+
+.popular-decks {
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(../images/populardeck.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-blend-mode: darken;
+  color: #FFFFFF;
+}
+
+.tournaments {
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(../images/tournaments.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-blend-mode: darken;
+  color: #FFFFFF;
+}
+
+.clan-wars h1 {
+  font-family: ClashFont;
+}
+
+.top-players h2 {
+  font-family: ClashFont;
+  color: #FFFFFF;
+}
+
+.top-clans h2 {
+  font-family: ClashFont;
+  color: #FFFFFF;
+}
+
+.popular-decks h2 {
+  font-family: ClashFont;
+  color: #FFFFFF;
+}
+
+.tournaments h2 {
+  font-family: ClashFont;
+  color: #FFFFFF;
+}
+.carousel-img {
+  object-fit: cover;
+  object-position: center center;
+  border-radius: 10px;
+  background-color: inherit;
+}
+
+.active {
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(../images/tournaments.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-blend-mode: darken;
+  color: #FFFFFF;
+  font-family: ClashFont;
+  object-position: center center;
+
+}
+.carousel-second {
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(../images/populardeck.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-blend-mode: darken;
+  color: #FFFFFF;
+  font-family: ClashFont;
+  object-position: center center;
+}
+.carousel-third {
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(../images/clanwar.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-blend-mode: darken;
+  color: #FFFFFF;
+  font-family: ClashFont;
+  object-position: center center;
+}
+.footer-div {
+  width: 33.33%;
+  color: #FFFFFF;
+  font-family: ClashFont;
 }

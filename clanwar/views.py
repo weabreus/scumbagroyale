@@ -43,7 +43,6 @@ def back_war_participation(request):
 
     return redirect(request, 'clanwar/war_participation.html')
 
-
 def current_war(tag):
     url = 'http://api.royaleapi.com/clans/' + tag + '/war'
 

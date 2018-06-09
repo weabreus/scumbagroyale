@@ -5,7 +5,6 @@ from datetime import datetime
 from time import strftime
 import pytz
 
-# Create your models here.
 
 class ClanStandings(models.Model):
     clan_img = models.URLField(default="https://royaleapi.com/static/img/badge/no_clan.png")
@@ -105,7 +104,6 @@ class WarParticipation(models.Model):
 
     def __str__(self):
         return self.war_id
-
 
 class Player(models.Model):
     player_tag = models.CharField(max_length=200)

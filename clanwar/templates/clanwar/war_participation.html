@@ -27,7 +27,7 @@
       <table style="width: 100%">
         <tbody>
           <tr>
-            <td><h4 style="margin: 5px 5px 5px 15px;"><strong>Current War - {{ cw|lookup:'state'}}</strong> <img src="../static/images/battle.png" height="20" width="22.17"></h4></td>
+            <td><h4 style="margin: 5px;"><strong>Current War - {{ cw|lookup:'state'}}</strong> <img src="../static/images/battle.png" height="20" width="22.17"></h4></td>
             <td style="text-align: right"><h6 style="margin: 5px 0px 5px 0px; padding-right: 15px;">{% if cw|lookup:'state' == 'warDay' %} <span class="label label-default">War ends at:</span> {{ cw|to_datetime:'warEndTime' }} {% endif %}</h6></td>
           </tr>
         </tbody>
@@ -36,7 +36,7 @@
     {% if cw|lookup:'state' != 'notInWar' %}
       {% if cw|lookup:'state' == 'collectionDay' %}
         <div class="row">
-          <div class="container panel-body" style="width: 100%; padding: 5px 15px 5px 15px;">
+          <div class="container panel-body" style="width: 100%; padding: 0px 15px 5px 0px;">
             <div class="col-md-4">
               <table class="table-condensed" style="width: 100%; padding: 0; margin: 0; border-top: 0px;">
                 <tbody>
@@ -63,7 +63,7 @@
                 </tbody>
               </table>
             </div>
-            <div class="col-md-5 player-separator" style="height: 130px;">
+            <div class="col-md-5 player-separator" style="height: 150px;">
               <table style="width: 100%;">
                 <tbody>
                   <tr>
@@ -147,7 +147,7 @@
               </tbody>
             </table>
           </div>
-          <div class="col-md-5 player-separator" style="height: 130px;">
+          <div class="col-md-5 player-separator" style="height: 150px;">
             <h4 style="margin-top: 5px;"><strong>Oponents</strong></h4>
             <table class="table table-condensed" style="width: 100%; padding: 0; margin: 0;">
               <tbody>
@@ -224,7 +224,7 @@
     {% endif %}
   </div>
 </div>
-<div class="participations" id='participations'>
+<div class="participations" id='participations' style="padding-bottom: 200px;">
     {%for war_id in id %}
     <div class="panel panel-default">
       <div class="row">
