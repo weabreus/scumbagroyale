@@ -40,7 +40,7 @@ class WarParticipation(models.Model):
         url = 'http://api.royaleapi.com/clans/' + request.GET['clan_tag'].upper()    + '/warlog'
 
         headers = {
-        'auth': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTE4LCJpZGVuIjoiOTcwMzE5NTA5ODM3NzgzMDQiLCJtZCI6e319.-4EA09joymVZjLrziSlx507kLtDCWQEy35lpnwmsSsA"
+        'auth': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTE4LCJpZGVuIjoiOTcwMzE5NTA5ODM3NzgzMDQiLCJtZCI6e30sInRzIjoxNTI5MDg3ODkwNjg4fQ.ED32G8YMFSkTAeyw1xzeX1VS4f286Jqye-g-OL9FeAM"
         }
 
         response = requests.request("GET", url, headers=headers)
@@ -145,7 +145,7 @@ class Player(models.Model):
         url = 'http://api.royaleapi.com/player/' + str(request.GET['player_tag']).upper()
 
         headers = {
-        'auth': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTE4LCJpZGVuIjoiOTcwMzE5NTA5ODM3NzgzMDQiLCJtZCI6e319.-4EA09joymVZjLrziSlx507kLtDCWQEy35lpnwmsSsA"
+        'auth': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTE4LCJpZGVuIjoiOTcwMzE5NTA5ODM3NzgzMDQiLCJtZCI6e30sInRzIjoxNTI5MDg3ODkwNjg4fQ.ED32G8YMFSkTAeyw1xzeX1VS4f286Jqye-g-OL9FeAM"
         }
 
         response = requests.request("GET", url, headers=headers)
